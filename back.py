@@ -23,7 +23,11 @@ def getids():
 def predict(id):
 
     id = int(id)
-    dd = {1234: 1, 2345: 0, 3456: 1}
+    dd = {
+        1234: 1,
+        2345: 0,
+        3456: 1,
+    }
 
     return str(dd[id])
 
