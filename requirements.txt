@@ -1,7 +1,4 @@
-streamlit
-
-flask
-
-requests
-
 pytest
+streamlit
+flask
+requests
