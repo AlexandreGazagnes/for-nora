@@ -1,12 +1,11 @@
 import streamlit as st
-import pandas as pd
+
+# import pandas as pd
 
 import requests
 
 port = 8080
 base = "http://127.0.0.1"
-
-
 option = "None"
 
 
@@ -31,14 +30,17 @@ def predict(id):
     assert int(r.status_code) == 200
 
     ans = eval(r.text)
-    assert ans in [0, 1, "0", 1]
+    assert ans in [0, 1, "0", "1"]
 
     return ans
 
 
 # selection
-option = st.selectbox("How would you like to be contacted?", get_ids())
+li_ids = get_ids()
+option = st.selectbox("who is the cleint?", li_ids)
 st.write("You selected:", option)
+
+print(option)
 
 
 # pred
