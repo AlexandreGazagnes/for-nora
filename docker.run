@@ -1,0 +1,7 @@
+# /bin/sh
+
+docker build -f ./Dockerfile -t p1-oc-dapy:latest .  
+
+docker run -ti p1-oc-dapy:latest python main.py
+
+docker run -ti p1-oc-dapy:latest /bin/bash        

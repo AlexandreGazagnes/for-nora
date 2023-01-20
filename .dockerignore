@@ -1,0 +1,21 @@
+__py*
+*.pyc
+
+# tests
+# tests/*
+
+env
+env/*
+
+snippets
+snippets/*
+
+tmp
+tmp/*
+
+README*
+
+.git
+
+
+*.csv
