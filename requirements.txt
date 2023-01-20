@@ -1,4 +1,7 @@
 pytest
+scikit-learn
+pandas
 streamlit
 flask
 requests
+shap

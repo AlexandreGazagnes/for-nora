@@ -1,6 +1,13 @@
+import pickle
+
 from flask import Flask
 
 app = Flask(__name__)
+
+
+with open("./model.pk", "rb") as f:
+    pk = f.read()
+    grid = pickle.loads(pk)
 
 
 @app.route("/")
