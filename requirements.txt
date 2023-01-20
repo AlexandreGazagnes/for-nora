@@ -1,7 +1,14 @@
 pytest
+
 scikit-learn
+
 pandas
+numpy
+
 streamlit
 flask
 requests
+
 shap
+
+Ipyton
