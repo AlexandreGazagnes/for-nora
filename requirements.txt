@@ -1,14 +1,17 @@
+Ipyton
+
 pytest
 
-scikit-learn
-
 pandas
-numpy
+# numpy
+
+matplotlib
+seaborn
+plotly
+
+scikit-learn
+shap
 
 streamlit
 flask
 requests
-
-shap
-
-Ipyton
