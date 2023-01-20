@@ -1,17 +1,17 @@
-Ipyton
+# Ipyton
 
-pytest
+# pytest
 
-pandas
-# numpy
+# pandas
+# # numpy
 
-matplotlib
-seaborn
-plotly
+# matplotlib
+# seaborn
+# plotly
 
-scikit-learn
-shap
+# scikit-learn
+# shap
 
 streamlit
-flask
-requests
+# flask
+# requests
