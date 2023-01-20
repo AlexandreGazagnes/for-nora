@@ -2,7 +2,7 @@ import streamlit as st
 
 # import pandas as pd
 
-import requests
+# import requests
 
 # port = 8080
 # base = "http://127.0.0.1"
