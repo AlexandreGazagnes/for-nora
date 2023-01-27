@@ -57,7 +57,9 @@ def hello():
 @app.route("/getids")
 def getids():
 
-    return str(passengers_id_list)
+    li = passengers_id_list[:30]
+
+    return str(li)
 
 
 @app.route("/get_passenger/<id>")
@@ -79,4 +81,4 @@ def predict(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=8080, host="0.0.0.0")
