@@ -1,4 +1,4 @@
-Ipyton
+Ipython
 
 pandas
 # numpy
@@ -8,7 +8,7 @@ seaborn
 plotly
 
 scikit-learn
-xgboost
+# xgboost
 shap
 
 streamlit

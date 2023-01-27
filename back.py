@@ -25,6 +25,8 @@ passengers_id_list = list(df.PassengerId.values)
 def extract_vect(PassengerId, _df):
     """extract from a df"""
 
+    PassengerId = int(PassengerId)
+
     X = _df.loc[_df.PassengerId == PassengerId].copy()
     assert len(X) == 1
 
@@ -57,7 +59,10 @@ def hello():
 @app.route("/getids")
 def getids():
 
-    return str(passengers_id_list)
+    li = passengers_id_list[:30]
+    logging.warning(li)
+
+    return str(li)
 
 
 @app.route("/get_passenger/<id>")
@@ -71,12 +76,34 @@ def get_passenger(id):
 @app.route("/predict/<id>")
 def predict(id):
 
+    # extract
     dd, _id, _target = extract_vect(id, df)
     # ans = model.predict(pd.Series(dd))
-    prob = model.predict_proba(pd.Series(dd))
 
-    return str(prob)
+    # build object predictable
+    logging.warning(dd)
+    ser = pd.Series(dd)
+    logging.warning(ser)
+    local_df = pd.DataFrame([ser])
+
+    # pred and proba
+    pred = model.predict(local_df)[0]
+    proba = model.predict_proba(local_df)[0]
+
+    # ans
+    ans = {"pred": pred, "proba": proba}
+
+    return str(ans)
+
+
+@app.route("/model_decision")
+def model_decision():
+
+    explain = {
+        k: v.round(2) for v, k in zip(model.feature_importances_, model.feature_names_in_)
+    }
+    return str(explain)
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=8080, host="0.0.0.0")
