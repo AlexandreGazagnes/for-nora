@@ -23,6 +23,8 @@ def test_get_ids():
     li = eval(r.text)
     assert isinstance(li, list)
 
+    return li[:10]
+
 
 def test_predict():
     """test predict"""
