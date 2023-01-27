@@ -1,7 +1,5 @@
 Ipyton
 
-pytest
-
 pandas
 # numpy
 
@@ -16,3 +14,8 @@ shap
 streamlit
 flask
 requests
+
+pytest
+
+flake8
+black
