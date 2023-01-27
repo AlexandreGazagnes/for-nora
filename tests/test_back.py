@@ -53,3 +53,12 @@ def test_predict():
     assert int(r.status_code) == 200
 
     print(r.text)
+
+
+def test_model_decision():
+
+    url = f"{base}:{port}/model_decision"
+    r = requests.get(url)
+    assert int(r.status_code) == 200
+
+    print(r.text)
