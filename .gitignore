@@ -132,3 +132,5 @@ dmypy.json
 # Personnal
 *.csv
 *.pk
+*.png
+*.pk
