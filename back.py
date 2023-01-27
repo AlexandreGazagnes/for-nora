@@ -1,42 +1,70 @@
-import pickle
+import pickle, os, sys, logging
+
+import pandas as pd
 
 from flask import Flask
+
+
+df = pd.read_csv("./data/cleaned/df_train.csv")
+
+
+passengers_id_list = list(df.PassengerId.values)
+
+
+def extract_vect(PassengerId, _df):
+    """extract from a df"""
+
+    X = _df.loc[_df.PassengerId == PassengerId].copy()
+    assert len(X) == 1
+
+    Passenger_id = X.PassengerId[0]
+    Survived = X.Survived[0]
+    X = X.drop(columns=["PassengerId", "Survived"])
+    ser = X.iloc[0].to_dict()
+
+    return ser, Passenger_id, Survived
+
+
+with open("./models/model.pk", "rb") as f:
+    pk = f.read()
+    model = pickle.loads(pk)
+
+
+with open("./explainers/shap.pk", "rb") as f:
+    pk = f.read()
+    explainer = pickle.loads(pk)
+
 
 app = Flask(__name__)
 
 
-with open("./model.pk", "rb") as f:
-    pk = f.read()
-    grid = pickle.loads(pk)
-
-
 @app.route("/")
-def hello_world():
+def hello():
     return "<p>Hello, World!</p>"
 
 
 @app.route("/getids")
 def getids():
 
-    ids = [
-        1234,
-        2345,
-        3456,
-    ]
-    return str(ids)
+    return str(passengers_id_list)
+
+
+@app.route("/get_passenger/<id>")
+def get_passenger(id):
+
+    dd, _id, _target = extract_vect(id, df)
+
+    return dd
 
 
 @app.route("/predict/<id>")
 def predict(id):
 
-    id = int(id)
-    dd = {
-        1234: 1,
-        2345: 0,
-        3456: 1,
-    }
+    dd, _id, _target = extract_vect(id, df)
+    # ans = model.predict(pd.Series(dd))
+    prob = model.predict_proba(pd.Series(dd))
 
-    return str(dd[id])
+    return str(prob)
 
 
 if __name__ == "__main__":
