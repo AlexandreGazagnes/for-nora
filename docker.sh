@@ -2,4 +2,4 @@
 
 docker build -f ./Dockerfile -t for-nora:latest .  
 # docker run -ti for-nora:latest python main.py
-docker run -ti for-nora:latest /bin/bash        
+docker run -p 8080:8080 -ti for-nora:latest python back.py 
