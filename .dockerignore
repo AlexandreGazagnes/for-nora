@@ -22,4 +22,4 @@ tmp/*
 
 # *.csv
 # *.pk
-*ipynb
+*.ipynb
