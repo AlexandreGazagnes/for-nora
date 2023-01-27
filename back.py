@@ -25,6 +25,8 @@ passengers_id_list = list(df.PassengerId.values)
 def extract_vect(PassengerId, _df):
     """extract from a df"""
 
+    PassengerId = int(PassengerId)
+
     X = _df.loc[_df.PassengerId == PassengerId].copy()
     assert len(X) == 1
 
@@ -58,6 +60,7 @@ def hello():
 def getids():
 
     li = passengers_id_list[:30]
+    logging.warning(li)
 
     return str(li)
 
