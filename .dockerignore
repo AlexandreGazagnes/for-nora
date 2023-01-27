@@ -20,6 +20,6 @@ tmp/*
 
 .git
 
-
-*.csv
-*.pk
+# *.csv
+# *.pk
+*ipynb
