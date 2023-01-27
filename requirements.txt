@@ -1,17 +1,21 @@
-# Ipyton
+Ipyton
 
-# pytest
+pandas
+# numpy
 
-# pandas
-# # numpy
+matplotlib
+seaborn
+plotly
 
-# matplotlib
-# seaborn
-# plotly
-
-# scikit-learn
-# shap
+scikit-learn
+xgboost
+shap
 
 streamlit
-# flask
-# requests
+flask
+requests
+
+pytest
+
+flake8
+black
