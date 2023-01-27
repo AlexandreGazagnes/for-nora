@@ -76,11 +76,33 @@ def get_passenger(id):
 @app.route("/predict/<id>")
 def predict(id):
 
+    # extract
     dd, _id, _target = extract_vect(id, df)
     # ans = model.predict(pd.Series(dd))
-    prob = model.predict_proba(pd.Series(dd))
 
-    return str(prob)
+    # build object predictable
+    logging.warning(dd)
+    ser = pd.Series(dd)
+    logging.warning(ser)
+    local_df = pd.DataFrame([ser])
+
+    # pred and proba
+    pred = model.predict(local_df)[0]
+    proba = model.predict_proba(local_df)[0]
+
+    # ans
+    ans = {"pred": pred, "proba": proba}
+
+    return str(ans)
+
+
+@app.route("/model_decision")
+def model_decision():
+
+    explain = {
+        k: v.round(2) for v, k in zip(model.feature_importances_, model.feature_names_in_)
+    }
+    return str(explain)
 
 
 if __name__ == "__main__":
