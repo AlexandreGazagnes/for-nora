@@ -32,9 +32,9 @@ def test_get_ids():
     return li[:10]
 
 
-def test_get_passenger():
+def test_get_passenger(random_id):
 
-    random_id = "848"
+    # random_id = "848"
 
     url = f"{base}:{port}/get_passenger/{random_id}"
     r = requests.get(url)
@@ -43,10 +43,10 @@ def test_get_passenger():
     print(r.text)
 
 
-def test_predict():
+def test_predict(random_id):
     """test predict"""
 
-    random_id = "848"
+    # random_id = "848"
 
     url = f"{base}:{port}/predict/{random_id}"
     r = requests.get(url)
