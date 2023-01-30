@@ -62,3 +62,12 @@ def test_model_decision():
     assert int(r.status_code) == 200
 
     print(r.text)
+
+
+def test_explaier(random_id):
+
+    url = f"{base}:{port}/explain/{random_id}"
+    r = requests.get(url)
+    assert int(r.status_code) == 200
+
+    print(r.text)
