@@ -15,6 +15,8 @@ import shap
 
 from flask import Flask
 
+shap.initjs()
+
 
 df = pd.read_csv("./data/cleaned/df_train.csv")
 
@@ -103,6 +105,40 @@ def model_decision():
         k: v.round(2) for v, k in zip(model.feature_importances_, model.feature_names_in_)
     }
     return str(explain)
+
+
+@app.route("/explain/<id>")
+def explain(id):
+
+    dd, _id, _target = extract_vect(id, df)
+
+    shap_values = explainer.shap_values(pd.DataFrame([dd]))
+    shap_false = shap_values[0]
+    shap_true = shap_values[1]
+
+    cols = pd.DataFrame([dd]).columns
+
+    # true / false
+    shap_true = (
+        pd.DataFrame(shap_true, columns=cols)
+        .iloc[0]
+        .sort_values(ascending=False)
+        .head(5)
+        .round(2)
+        .to_dict()
+    )
+    shap_false = (
+        pd.DataFrame(shap_false, columns=cols)
+        .iloc[0]
+        .sort_values(ascending=False)
+        .head(5)
+        .round(2)
+        .to_dict()
+    )
+
+    ans = {"true": shap_true, "false": shap_false}
+
+    return str(ans)
 
 
 if __name__ == "__main__":
