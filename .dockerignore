@@ -23,3 +23,7 @@ tmp/*
 # *.csv
 # *.pk
 *.ipynb
+
+
+# assets/
+# data/

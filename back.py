@@ -50,96 +50,102 @@ with open("./explainers/shap.pk", "rb") as f:
     explainer = pickle.loads(pk)
 
 
-app = Flask(__name__)
+def create_app():
 
+    app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return "<p>Hello, World!</p>"
+    @app.route("/")
+    def hello():
 
+        data = {"msg": "<p>Hello, World!</p>"}
 
-@app.route("/getids")
-def getids():
+        return str(data)
 
-    li = passengers_id_list[:30]
-    logging.warning(li)
+    @app.route("/getids")
+    def getids():
 
-    return str(li)
+        li = passengers_id_list[:30]
+        logging.warning(li)
 
+        data = {"id_list": li[:30]}
 
-@app.route("/get_passenger/<id>")
-def get_passenger(id):
+        return str(data)
 
-    dd, _id, _target = extract_vect(id, df)
+    @app.route("/get_passenger/<id>")
+    def get_passenger(id):
 
-    return dd
+        data, _id, _target = extract_vect(id, df)
 
+        return str(data)
 
-@app.route("/predict/<id>")
-def predict(id):
+    @app.route("/predict/<id>")
+    def predict(id):
 
-    # extract
-    dd, _id, _target = extract_vect(id, df)
-    # ans = model.predict(pd.Series(dd))
+        # extract
+        dd, _id, _target = extract_vect(id, df)
+        # ans = model.predict(pd.Series(dd))
 
-    # build object predictable
-    logging.warning(dd)
-    ser = pd.Series(dd)
-    logging.warning(ser)
-    local_df = pd.DataFrame([ser])
+        # build object predictable
+        logging.warning(dd)
+        ser = pd.Series(dd)
+        logging.warning(ser)
+        local_df = pd.DataFrame([ser])
 
-    # pred and proba
-    pred = model.predict(local_df)[0]
-    proba = model.predict_proba(local_df)[0]
+        # pred and proba
+        pred = model.predict(local_df)[0]
+        proba = model.predict_proba(local_df)[0]
 
-    # ans
-    ans = {"pred": pred, "proba": proba}
+        # ans
+        data = {"pred": pred, "proba": proba.tolist()}
 
-    return str(ans)
+        return str(data)
 
+    @app.route("/model_decision")
+    def model_decision():
 
-@app.route("/model_decision")
-def model_decision():
+        data = {
+            k: v.round(2)
+            for v, k in zip(model.feature_importances_, model.feature_names_in_)
+        }
+        return str(data)
 
-    explain = {
-        k: v.round(2) for v, k in zip(model.feature_importances_, model.feature_names_in_)
-    }
-    return str(explain)
+    @app.route("/explain/<id>")
+    def explain(id):
 
+        dd, _id, _target = extract_vect(id, df)
 
-@app.route("/explain/<id>")
-def explain(id):
+        shap_values = explainer.shap_values(pd.DataFrame([dd]))
+        shap_false = shap_values[0]
+        shap_true = shap_values[1]
 
-    dd, _id, _target = extract_vect(id, df)
+        cols = pd.DataFrame([dd]).columns
 
-    shap_values = explainer.shap_values(pd.DataFrame([dd]))
-    shap_false = shap_values[0]
-    shap_true = shap_values[1]
+        # true / false
+        shap_true = (
+            pd.DataFrame(shap_true, columns=cols)
+            .iloc[0]
+            .sort_values(ascending=False)
+            .head(5)
+            .round(2)
+            .to_dict()
+        )
+        shap_false = (
+            pd.DataFrame(shap_false, columns=cols)
+            .iloc[0]
+            .sort_values(ascending=False)
+            .head(5)
+            .round(2)
+            .to_dict()
+        )
 
-    cols = pd.DataFrame([dd]).columns
+        data = {"true": shap_true, "false": shap_false}
 
-    # true / false
-    shap_true = (
-        pd.DataFrame(shap_true, columns=cols)
-        .iloc[0]
-        .sort_values(ascending=False)
-        .head(5)
-        .round(2)
-        .to_dict()
-    )
-    shap_false = (
-        pd.DataFrame(shap_false, columns=cols)
-        .iloc[0]
-        .sort_values(ascending=False)
-        .head(5)
-        .round(2)
-        .to_dict()
-    )
+        return str(data)
 
-    ans = {"true": shap_true, "false": shap_false}
-
-    return str(ans)
+    return app
 
 
 if __name__ == "__main__":
+
+    app = create_app()
     app.run(debug=True, port=8080, host="0.0.0.0")

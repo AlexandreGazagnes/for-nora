@@ -1,14 +1,32 @@
-import requests
 import pytest
+
+import pandas as pd
+import numpy as np
+
+import requests
+
+from back import create_app
+
 
 port = 8080
 base = "http://127.0.0.1"
 
 
 @pytest.fixture
-def random_id():
+def ids_list():
 
-    return "848"
+    df = pd.read_csv("./data/cleaned/df_train.csv")
+    passengers_id_list = list(df.PassengerId.values)
+
+    return passengers_id_list
+
+
+@pytest.fixture
+def app():
+
+    app = create_app()
+
+    return app
 
 
 def test_hello():
@@ -16,6 +34,7 @@ def test_hello():
 
     url = f"{base}:{port}/"
     r = requests.get(url + "")
+
     assert int(r.status_code) == 200
 
 
@@ -26,15 +45,18 @@ def test_get_ids():
     r = requests.get(url)
     assert int(r.status_code) == 200
 
-    li = eval(r.text)
-    assert isinstance(li, list)
+    data = eval(r.text)
+    assert isinstance(data, dict)
 
-    return li[:10]
+    print(str(li[:10]))
+
+    data = str({"id_list": li[:30]})
+
+    return data
 
 
+@pytest.mark.parametrize("random_id", list_test_id)
 def test_get_passenger(random_id):
-
-    # random_id = "848"
 
     url = f"{base}:{port}/get_passenger/{random_id}"
     r = requests.get(url)
@@ -42,17 +64,18 @@ def test_get_passenger(random_id):
 
     print(r.text)
 
+    return r.text
+
 
 def test_predict(random_id):
-    """test predict"""
-
-    # random_id = "848"
 
     url = f"{base}:{port}/predict/{random_id}"
     r = requests.get(url)
     assert int(r.status_code) == 200
 
     print(r.text)
+
+    return r.text
 
 
 def test_model_decision():
@@ -63,6 +86,8 @@ def test_model_decision():
 
     print(r.text)
 
+    return r.text
+
 
 def test_explaier(random_id):
 
@@ -71,3 +96,5 @@ def test_explaier(random_id):
     assert int(r.status_code) == 200
 
     print(r.text)
+
+    return r.text
