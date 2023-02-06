@@ -31,4 +31,10 @@ def test_extract_vect() :
         _id = choice(passengers_id_list) 
         ser, Passenger_id, Survived = extract_vect(str(_id), df)
 
-    
+
+@pytest.mark.parametrize(
+    "_id",passengers_id_list[-10:]
+)
+def test_extract_vect_2(_id) : 
+
+    ser, Passenger_id, Survived = extract_vect(str(_id), df)
