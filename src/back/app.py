@@ -1,8 +1,10 @@
+"""
+App file with flask create function
+"""
+
 import os, sys, logging
 
-
 from flask import Flask
-
 
 from src.back.routes import (
     _hello,

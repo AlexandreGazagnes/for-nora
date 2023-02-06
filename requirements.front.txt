@@ -1,0 +1,13 @@
+pandas
+numpy
+
+streamlit
+requests
+
+pytest
+pytest-flask
+flake8
+black
+pylint
+
+Ipython

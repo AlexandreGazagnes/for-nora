@@ -1,17 +1,17 @@
-import pickle
+import os, pickle, warnings, logging
 
 
-def get_model(MODEL_FILE):
-    with open(MODEL_FILE, "rb") as f:
+MODEL_FILE = os.getenv("MODEL_FILE")
+SHAP_FILE = os.getenv("SHAP_FILE")
+
+
+def read_pk(fn):
+    """ """
+
+    logging.info(fn)
+
+    with open(fn, "rb") as f:
         pk = f.read()
         model = pickle.loads(pk)
 
     return model
-
-
-def get_shap(SHAP_FILE):
-    with open(SHAP_FILE, "rb") as f:
-        pk = f.read()
-        explainer = pickle.loads(pk)
-
-    return explainer

@@ -1,0 +1,20 @@
+pandas
+numpy
+
+matplotlib
+seaborn
+plotly
+
+scikit-learn
+# xgboost
+shap
+
+flask
+
+pytest
+pytest-flask
+flake8
+black
+pylint
+
+Ipython

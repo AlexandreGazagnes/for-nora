@@ -1,10 +1,20 @@
+import os
+
 import pandas as pd
 
 
-df = pd.read_csv(DATA_FILE)
+def get_df(fn):
+    """ """
+
+    return pd.read_csv(fn)
 
 
-passengers_id_list = list(df.PassengerId.values)
+def get_passenger_id(fn):
+    """ """
+
+    passengers_id_list = list(get_df(fn).PassengerId.values)
+
+    return passengers_id_list
 
 
 def extract_vect(_id, df, id_col="PassengerId", target_col="Survived"):
