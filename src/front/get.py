@@ -1,7 +1,7 @@
 import requests
 
-def _extract_request(url):
 
+def _extract_request(url):
     # get
     r = requests.get(url)
     assert int(r.status_code) == 200
@@ -21,7 +21,14 @@ def _extract_request(url):
 def get_ids(base, n=30):
     """get ids"""
 
-    url = f"{base}/getids"
+    url = f"{base}/get_ids"
+    print("\n\n" + url)
+
+    return _extract_request(url)
+
+
+def get_passenger(base, _id):
+    url = f"{base}/get_passenger/{_id}"
     print("\n\n" + url)
 
     return _extract_request(url)
@@ -29,33 +36,23 @@ def get_ids(base, n=30):
 
 # @st.cache
 def get_model_decision(base):
-
-    url = f"{base}/model_decision"
+    url = f"{base}/get_model_decision"
     print("\n\n" + url)
 
     return _extract_request(url)
 
 
-def get_passenger(base, _id):
-
-    url = f"{base}/get_passenger/{_id}"
-    print("\n\n" + url)
-
-    return _extract_request(url)
-
-
-def get_predict(base, _id):
+def get_prediction(base, _id):
     """test predict"""
 
-    url = f"{base}/predict/{_id}"
+    url = f"{base}/get_prediction/{_id}"
     print("\n\n" + url)
 
     return _extract_request(url)
 
 
-def get_explainer(base, _id):
-
-    url = f"{base}/explain/{_id}"
+def get_shap(base, _id):
+    url = f"{base}/get_shap/{_id}"
     print("\n\n" + url)
 
     return _extract_request(url)
@@ -63,5 +60,3 @@ def get_explainer(base, _id):
 
 #######################
 #######################
-
-

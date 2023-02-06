@@ -1,5 +1,12 @@
-# import pickle, os, sys, logging
 import os, sys, logging
+
+from flask import Flask
+
+from src.back.app import create_app
+
+
+# import pickle, os, sys, logging
+
 # import requests
 
 # import pandas as pd
@@ -15,20 +22,12 @@ import os, sys, logging
 # import pandas as pd
 # import shap
 
-from flask import Flask
-
-
-
 # shap.initjs()
 
 
-from src.back.app import create_app
-
-BACK_DEBUG =True
-BACK_PORT = 8080
-BACK_HOST = "0.0.0.0"
-
-
+BACK_DEBUG = True
+BACK_PORT  = 8080
+BACK_HOST  = "0.0.0.0"
 
 
 
