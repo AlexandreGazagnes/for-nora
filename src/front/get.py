@@ -56,7 +56,3 @@ def get_shap(base, _id):
     print("\n\n" + url)
 
     return _extract_request(url)
-
-
-#######################
-#######################

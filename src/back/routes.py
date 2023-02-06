@@ -3,8 +3,6 @@ import os, sys, logging
 import pandas as pd
 from flask import jsonify
 
-# import shap
-
 from src.back.data import *
 from src.back.pks import *
 

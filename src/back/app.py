@@ -1,24 +1,7 @@
-# import pickle, os, sys, logging
 import os, sys, logging
 
-# import requests
-
-# import pandas as pd
-# import numpy as np
-
-# from sklearn.model_selection import *
-# from sklearn.compose import *
-# from sklearn.pipeline import *
-# from sklearn.impute import *
-# from sklearn.preprocessing import *
-# from sklearn.ensemble import *
-
-# import pandas as pd
-# import shap
 
 from flask import Flask
-
-# shap.initjs()
 
 
 from src.back.routes import (

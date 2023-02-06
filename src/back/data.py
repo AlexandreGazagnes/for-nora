@@ -1,9 +1,6 @@
 import pandas as pd
 
 
-
-DATA_FILE = "./assets/data/cleaned/df_train.csv"
-
 df = pd.read_csv(DATA_FILE)
 
 
@@ -26,5 +23,3 @@ def extract_vect(_id, df, id_col="PassengerId", target_col="Survived"):
     ser = X.iloc[0].to_dict()
 
     return ser, id_val, target_val
-
-

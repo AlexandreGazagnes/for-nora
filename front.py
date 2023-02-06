@@ -9,11 +9,23 @@ import numpy as np
 import requests
 
 
+from src.front import *
 from src.front.cache import *
 from src.front.get import *
 
 
 # title
+
+
+# cache
+id_list = get_ids(BASE_URL)["id_list"]
+print(id_list)
+np.random.shuffle(id_list)
+print(id_list)
+
+
+model_dec = get_model_decision(BASE_URL)
+
 
 st.title("APP PREDICTION")
 

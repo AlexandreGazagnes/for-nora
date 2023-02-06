@@ -5,12 +5,10 @@ import pytest
 
 @pytest.fixture
 def random_id():
-
     return "848"
 
 
 def test_fixture(random_id):
-
     assert random_id == "848"
 
 
@@ -22,19 +20,18 @@ def test_fixture(random_id):
     ],
 )
 def test_parametrize(result, operation):
-
     opp = eval(operation)
     assert result == opp
 
 
-
-def test_python_v() : 
-
+def test_python_v():
     # The shell command to run
     command = "python --version"
 
     # Run the shell command
-    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
 
     # Get the standard output and error as bytes
     output = result.stdout
@@ -54,13 +51,15 @@ def test_python_v() :
 
     assert output_list[1] == "8"
 
-def test_python_env() : 
 
+def test_python_env():
     # The shell command to run
     command = "which python"
 
     # Run the shell command
-    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
 
     # Get the standard output and error as bytes
     output = result.stdout
@@ -75,4 +74,3 @@ def test_python_env() :
     print(output_str)
     print("Error:")
     print(error_str)
-

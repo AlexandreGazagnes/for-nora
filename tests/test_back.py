@@ -14,7 +14,6 @@ base = "http://127.0.0.1"
 
 @pytest.fixture
 def ids_list():
-
     df = pd.read_csv("./data/cleaned/df_train.csv")
     passengers_id_list = list(df.PassengerId.values)
 
@@ -23,7 +22,6 @@ def ids_list():
 
 @pytest.fixture
 def app():
-
     app = create_app()
 
     return app
@@ -55,9 +53,8 @@ def test_get_ids():
     return data
 
 
-@pytest.mark.parametrize("random_id", list_test_id)
+@pytest.mark.parametrize("random_id", ids_list)
 def test_get_passenger(random_id):
-
     url = f"{base}:{port}/get_passenger/{random_id}"
     r = requests.get(url)
     assert int(r.status_code) == 200
@@ -68,7 +65,6 @@ def test_get_passenger(random_id):
 
 
 def test_predict(random_id):
-
     url = f"{base}:{port}/predict/{random_id}"
     r = requests.get(url)
     assert int(r.status_code) == 200
@@ -79,7 +75,6 @@ def test_predict(random_id):
 
 
 def test_model_decision():
-
     url = f"{base}:{port}/model_decision"
     r = requests.get(url)
     assert int(r.status_code) == 200
@@ -90,7 +85,6 @@ def test_model_decision():
 
 
 def test_explaier(random_id):
-
     url = f"{base}:{port}/explain/{random_id}"
     r = requests.get(url)
     assert int(r.status_code) == 200

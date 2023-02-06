@@ -12,9 +12,8 @@ WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
 RUN python -m pip install -r requirements.txt
 
-# COPY ./make.sh /app/make.sh
-
 # Make
+# COPY ./make.sh /app/make.sh
 # RUN chmod +x ./make.sh && ./make.sh
 
 # Copy the app 

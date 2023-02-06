@@ -1,34 +1,36 @@
-mlflow
-mlflow[extras]
-# shap
+pandas
+numpy
+
+matplotlib
+seaborn
+plotly
+
+scikit-learn
+# xgboost
+shap
+
+streamlit
+flask
+requests
+
+pytest
+pytest-flask
+flake8
+black
+pylint
 
 Ipython
 
-streamlit
 
-pytest
-black
 
-# pandas
-# # numpy
 
-# matplotlib
-# seaborn
-# plotly
+# mlflow
+# mlflow[extras]
 
-# scikit-learn
-# # xgboost
-# shap
 
-# streamlit
-# flask
-# requests
 
-# pytest
-# pytest-flask
 
-# flake8
-# black
+
 
 
 # altair==4.2.1

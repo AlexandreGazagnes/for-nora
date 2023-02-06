@@ -1,11 +1,7 @@
 import pickle
 
 
-MODEL_FILE = "./assets/models/model.pk"
-SHAP_FILE = "./assets/explainers/shap.pk"
-
-
-def get_model():
+def get_model(MODEL_FILE):
     with open(MODEL_FILE, "rb") as f:
         pk = f.read()
         model = pickle.loads(pk)
@@ -13,7 +9,7 @@ def get_model():
     return model
 
 
-def get_shap():
+def get_shap(SHAP_FILE):
     with open(SHAP_FILE, "rb") as f:
         pk = f.read()
         explainer = pickle.loads(pk)
