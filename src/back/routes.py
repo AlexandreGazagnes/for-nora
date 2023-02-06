@@ -1,10 +1,11 @@
-from back.data import * 
-from back.pks import * 
+import os, sys, logging
 
+import pandas as pd
 from flask import jsonify
+# import shap
 
-import shap
-
+from src.back.data import * 
+from src.back.pks import * 
 
 
 
@@ -12,7 +13,8 @@ def _hello() :
 
     data = {"msg": "<p>Hello, World!</p>"}
 
-    return jsonify(data)
+    assert isinstance(data, dict)
+    return data
 
 
 def _getids(): 
@@ -22,14 +24,16 @@ def _getids():
 
     data = {"id_list": li[:30]}
 
-    return jsonify(data)
+    assert isinstance(data, dict)
+    return data
 
 
 def _get_passenger(_id) : 
 
     data, _id, _target = extract_vect(_id, df)
 
-    return jsonify(data)
+    assert isinstance(data, dict)
+    return data
 
 
 def _get_prediction(_id) : 
@@ -45,28 +49,37 @@ def _get_prediction(_id) :
     local_df = pd.DataFrame([ser])
 
     # pred and proba
+    model = get_model()
     pred = model.predict(local_df)[0]
     proba = model.predict_proba(local_df)[0]
 
     # ans
     data = {"pred": pred, "proba": proba.tolist()}
+    logging.warning(data)
 
-    return jsonify(data)
+    assert isinstance(data, dict)
+    return data
 
 
 
 def _get_model_decision() : 
 
+
+    model = get_model()
+
     data = {
         k: v.round(2)
-        for v, k in zip(model.feature_importances_, model.feature_names_in_)
-    }
-    return jsonify(data)
+        for v, k in zip(model.feature_importances_, model.feature_names_in_)}
+    
+    assert isinstance(data, dict)
+    return data
 
 
 def _get_explaination(_id) : 
 
         dd, _id, _target = extract_vect(_id, df)
+
+        explainer = get_shap()
 
         shap_values = explainer.shap_values(pd.DataFrame([dd]))
         shap_false = shap_values[0]
@@ -94,4 +107,5 @@ def _get_explaination(_id) :
 
         data = {"true": shap_true, "false": shap_false}
 
-        return jsonify(data)
+        assert isinstance(data, dict)
+        return data

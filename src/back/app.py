@@ -20,7 +20,7 @@ from flask import Flask
 # shap.initjs()
 
 
-from back.routes import *  
+from src.back.routes import _get_explaination, _get_passenger, _get_prediction, _get_model_decision, _getids, _hello
 
 
 
@@ -62,8 +62,3 @@ def create_app():
 
     return app
 
-
-if __name__ == "__main__":
-
-    app = create_app()
-    app.run(debug=True, port=8080, host="0.0.0.0")

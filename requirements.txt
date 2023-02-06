@@ -1,9 +1,11 @@
 mlflow
 mlflow[extras]
+# shap
 
 Ipython
 
-shap
+streamlit
+
 
 # pandas
 # # numpy

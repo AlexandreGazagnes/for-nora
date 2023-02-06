@@ -1,7 +1,10 @@
 import pandas as pd
 
 
-df = pd.read_csv("./data/cleaned/df_train.csv")
+
+DATA_FILE = "./assets/data/cleaned/df_train.csv"
+
+df = pd.read_csv(DATA_FILE)
 
 
 passengers_id_list = list(df.PassengerId.values)
