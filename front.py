@@ -52,10 +52,11 @@ vals = pd.DataFrame(true + false, columns=["_decision", "_feature", "_value"])
 
 st.table(vals)
 
-pivot = vals.pivot(index="_decision", columns="_feature", values="_value")
+pivot = vals.pivot(index="_feature", columns="_decision", values="_value")
 
 
 st.table(pivot)
+st.bar_chart(pivot)
 
 
 chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
