@@ -1,4 +1,4 @@
-import os, sys, logging, warnings
+import os, sys, logging, warnings, json
 from random import shuffle
 
 import streamlit as st
@@ -8,13 +8,24 @@ import numpy as np
 
 import requests
 
-
 from src.front import *
 from src.front.cache import *
 from src.front.get import *
 
 
+with open("./conf.front.json", "r") as f:
+    data = json.load(f)
+
+
 # title
+
+
+BACK_PORT = data.get("BACK_PORT")
+BACK_URL = data.get("BACK_URL")
+BACK_OPTION = data.get("BACK_OPTION")
+
+
+BASE_URL = f"{BACK_URL}:{BACK_PORT}"
 
 
 # cache

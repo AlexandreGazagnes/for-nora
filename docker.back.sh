@@ -1,4 +1,4 @@
 #! /bin/sh
 
-docker build -f ./Dockerfile -t for-nora:latest . &&  \
-docker run --env-file=./conf.env -p 8080:8080 -ti for-nora:latest /bin/bash
+docker build -f ./Dockerfile.back -t for-nora.back:latest . &&  \
+docker run  -p 8080:8080 -ti for-nora.back:latest python run_back.py

@@ -1,4 +1,7 @@
 #! /bin/sh
 
-docker build -f ./Dockerfile -t for-nora:latest . &&  \
-docker run --env-file=./conf.env -p 8080:8080 -ti for-nora:latest /bin/bash
+
+
+
+docker build -f ./Dockerfile.front -t for-nora-front:latest . &&  \
+docker run -p 5000-5000 -ti for-nora-front:latest streamlit run run_front.py --server.port 5000  

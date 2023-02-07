@@ -1,4 +1,10 @@
+import os, sys, logging, json
+
 import requests
+
+
+with open("./conf.back.json", "r") as f:
+    data = json.load(f)
 
 
 def _extract_request(url):
