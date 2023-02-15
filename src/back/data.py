@@ -1,23 +1,32 @@
+"""
+
+"""
+
 import os
 
 import pandas as pd
 
 
-def get_df(fn):
+def get_df(filename: str) -> pd.DataFrame:
     """ """
 
-    return pd.read_csv(fn)
+    return pd.read_csv(filename)
 
 
-def get_passenger_id(fn):
+def get_passenger_id(filename: str) -> list:
     """ """
 
-    passengers_id_list = list(get_df(fn).PassengerId.values)
+    passengers_id_list = list(get_df(filename).PassengerId.values)
 
     return passengers_id_list
 
 
-def extract_vect(_id, df, id_col="PassengerId", target_col="Survived"):
+def extract_vect(
+    _id: int,
+    df: pd.DataFrame,
+    id_col: str = "PassengerId",
+    target_col: str = "Survived",
+) -> tuple:
     """extract from a df"""
 
     _id = int(_id)

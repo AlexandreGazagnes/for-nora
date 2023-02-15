@@ -27,14 +27,14 @@ def _extract_request(url):
 def get_ids(base, n=30):
     """get ids"""
 
-    url = f"{base}/get_ids"
+    url = f"{base}get_ids"
     print("\n\n" + url)
 
     return _extract_request(url)
 
 
 def get_passenger(base, _id):
-    url = f"{base}/get_passenger/{_id}"
+    url = f"{base}get_passenger/{_id}"
     print("\n\n" + url)
 
     return _extract_request(url)
@@ -42,7 +42,7 @@ def get_passenger(base, _id):
 
 # @st.cache
 def get_model_decision(base):
-    url = f"{base}/get_model_decision"
+    url = f"{base}get_model_decision"
     print("\n\n" + url)
 
     return _extract_request(url)
@@ -51,14 +51,14 @@ def get_model_decision(base):
 def get_prediction(base, _id):
     """test predict"""
 
-    url = f"{base}/get_prediction/{_id}"
+    url = f"{base}get_prediction/{_id}"
     print("\n\n" + url)
 
     return _extract_request(url)
 
 
 def get_shap(base, _id):
-    url = f"{base}/get_shap/{_id}"
+    url = f"{base}get_shap/{_id}"
     print("\n\n" + url)
 
     return _extract_request(url)

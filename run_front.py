@@ -20,12 +20,12 @@ with open("./conf.front.json", "r") as f:
 # title
 
 
-BACK_PORT = data.get("BACK_PORT")
-BACK_URL = data.get("BACK_URL")
-BACK_OPTION = data.get("BACK_OPTION")
+BACK_PORT = data.get("BACK_PORT", "8080")
+BACK_URL = data.get("BACK_URL", "127.0.0.1")
+BACK_OPTION = data.get("BACK_OPTION", True)
 
 
-BASE_URL = f"{BACK_URL}:{BACK_PORT}"
+BASE_URL = f"http://{BACK_URL}:{BACK_PORT}/"
 
 
 # cache

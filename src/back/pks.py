@@ -1,16 +1,15 @@
+"""
+
+"""
 import os, pickle, warnings, logging
 
 
-MODEL_FILE = os.getenv("MODEL_FILE")
-SHAP_FILE = os.getenv("SHAP_FILE")
-
-
-def read_pk(fn):
+def read_pk(filename: str) -> object:
     """ """
 
-    logging.info(fn)
+    logging.info(filename)
 
-    with open(fn, "rb") as f:
+    with open(filename, "rb") as f:
         pk = f.read()
         model = pickle.loads(pk)
 
