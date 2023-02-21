@@ -1,4 +1,11 @@
 # for-nora
 
 
-Try a merge on main
+
+
+
+# back : 
+- ./docker.back.sh
+
+# front
+- streamlit run run_front.py
