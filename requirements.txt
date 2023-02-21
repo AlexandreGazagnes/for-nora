@@ -1,27 +1,36 @@
 pandas
 numpy
 
+scipy
+statsmodels
+
 matplotlib
 seaborn
 plotly
 
+
 scikit-learn
-# xgboost
+imbalanced-learn
+category_encoders
+xgboost
+lightgbm
 shap
 
 streamlit
 flask
 requests
+gunicorn
 
 pytest
 pytest-flask
 flake8
+mypy
 black
 pylint
 
-Ipython
-
-
+ipython
+ipykernel
+ipywidgets
 
 
 # mlflow
